@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  --ui-primary: var(--ui-color-primary);
+}
+
+.dark {
+  --ui-primary: var(--ui-mongoose-200);
+}
+
+@theme static {
+
+  --color-primary: #bfa181;
+  --color-mongoose-50: #f9f6f3;
+  --color-mongoose-100: #f1ece3;
+  --color-mongoose-200: #e2d7c6;
+  --color-mongoose-300: #d0bca1;
+  --color-mongoose-400: #bfa181;
+  --color-mongoose-500: #ae8661;
+  --color-mongoose-600: #a17455;
+  --color-mongoose-700: #865e48;
+  --color-mongoose-800: #6d4d3f;
+  --color-mongoose-900: #594035;
+  --color-mongoose-950: #2f201b;
+}

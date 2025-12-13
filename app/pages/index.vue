@@ -1,13 +1,9 @@
 <template>
   <div>
-    
+    <h1 class="text-5xl text-primary">Homepage</h1>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>
