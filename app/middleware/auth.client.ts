@@ -1,6 +1,8 @@
 export default defineNuxtRouteMiddleware((to) => {
   const { isAuthenticated } = useAuth();
 
+  console.log(isAuthenticated);
+
   // If not authenticated and trying to access protected route, redirect to login
   if (
     !isAuthenticated.value &&
@@ -12,7 +14,7 @@ export default defineNuxtRouteMiddleware((to) => {
     return navigateTo("/login");
   }
 
-  // If authenticated and trying to access auth pages, redirect to home
+  // If authenticated and trying to access auth pages, redirect to admin dashboard
   if (
     isAuthenticated.value &&
     (to.path === "/login" ||
@@ -20,6 +22,6 @@ export default defineNuxtRouteMiddleware((to) => {
       to.path === "/forgot-password" ||
       to.path === "/reset-password")
   ) {
-    return navigateTo("/");
+    return navigateTo("/admin");
   }
 });

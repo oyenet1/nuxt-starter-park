@@ -141,6 +141,9 @@ async function loginWithGoogle() {
       redirectTo: window.location.origin,
     },
   });
+
+  toast.add({ title: "Login successfully with google", color: "success" });
+
   if (error) {
     toast.add({ title: "Error", description: error.message, color: "error" });
   }
@@ -153,8 +156,15 @@ async function loginWithGithub() {
       redirectTo: window.location.origin,
     },
   });
+
+  toast.add({ title: "Login successfully with githib", color: "success" });
+
   if (error) {
     toast.add({ title: "Error", description: error.message, color: "error" });
   }
 }
+
+definePageMeta({
+  middleware: "auth-client",
+});
 </script>

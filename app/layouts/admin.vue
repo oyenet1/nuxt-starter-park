@@ -9,7 +9,7 @@
     >
       <!-- Header -->
       <div class="flex items-center justify-between p-4 border-b">
-        <div v-if="!collapsed" class="font-bold text-lg">Admin</div>
+        <div v-if="!collapsed" class="font-bold text-xl">SupaNuxt</div>
         <UButton
           @click="toggleSidebar"
           variant="ghost"
@@ -18,7 +18,7 @@
         />
       </div>
       <!-- Navigation -->
-      <nav class="p-4 space-y-2">
+      <nav class="p-3 space-y-2">
         <UTooltip
           v-for="item in navigation"
           :key="item.name"
@@ -47,7 +47,7 @@
         <div class="flex items-center justify-between">
           <h1 class="text-2xl font-bold">Admin Dashboard</h1>
           <div class="flex items-center space-x-4">
-            <span>Welcome, {{ user?.email }}</span>
+            <span>Welcome, {{ user?.user_metadata.full_name }}</span>
             <UButton @click="logout" variant="outline">Logout</UButton>
           </div>
         </div>

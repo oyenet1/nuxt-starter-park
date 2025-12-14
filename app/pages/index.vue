@@ -9,7 +9,9 @@
         Your authentication is powered by Supabase
       </p>
       <div v-if="isAuthenticated">
-        <p class="text-lg">Hello, {{ user?.email }}</p>
+        <h1 class="text-lg">Hello, {{ user?.user_metadata.full_name }}</h1>
+        <p>Email: {{ user.email }}</p>
+        <div></div>
         <UButton @click="logout" class="mt-4" size="lg">Logout</UButton>
       </div>
       <div v-else>
