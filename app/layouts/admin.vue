@@ -45,7 +45,7 @@
       <!-- Header -->
       <header class="bg-white shadow-sm p-4">
         <div class="flex items-center justify-between">
-          <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+          <h1 class="text-2xl font-bold">Dashboard</h1>
           <div class="flex items-center space-x-4">
             <span>Welcome, {{ user?.user_metadata.full_name }}</span>
             <UButton @click="logout" variant="outline">Logout</UButton>
@@ -90,10 +90,12 @@ const navigation = [
 
 const { user, logout } = useAuth();
 
+const { isMobile } = useDevice();
+
 // Responsive: auto-collapse on mobile
 onMounted(() => {
   const checkScreen = () => {
-    if (window.innerWidth < 768) {
+    if (isMobile) {
       collapsed.value = true;
     }
   };
