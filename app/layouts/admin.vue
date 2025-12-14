@@ -18,8 +18,12 @@
         />
       </div>
       <!-- Navigation -->
-      <nav class="p-3 space-y-2">
+      <nav :class="['space-y-2', collapsed ? 'p-2.5' : 'p-4']">
         <UTooltip
+          arrow
+          :content="{
+            side: 'right',
+          }"
           v-for="item in navigation"
           :key="item.name"
           :text="collapsed ? item.label : ''"
@@ -29,6 +33,7 @@
             :to="item.to"
             :class="[
               'flex items-center space-x-3 p-3 rounded-lg transition-colors',
+              collapsed && 'justify-center',
               $route.path === item.to
                 ? 'bg-primary text-white'
                 : 'text-gray-700 hover:bg-gray-200',
@@ -47,7 +52,12 @@
         <div class="flex items-center justify-between">
           <h1 class="text-2xl font-bold">Dashboard</h1>
           <div class="flex items-center space-x-4">
-            <span>Welcome, {{ user?.user_metadata.full_name }}</span>
+            <span
+              >Welcome,
+              {{
+                user?.user_metadata.name || user.user_metadata.full_name
+              }}</span
+            >
             <UButton @click="logout" variant="outline">Logout</UButton>
           </div>
         </div>
