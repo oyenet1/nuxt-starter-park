@@ -8,14 +8,9 @@
       ]"
     >
       <!-- Header -->
-      <div class="flex items-center justify-between p-4 border-b">
-        <div v-if="!collapsed" class="font-bold text-xl">SupaNuxt</div>
-        <UButton
-          @click="toggleSidebar"
-          variant="ghost"
-          size="sm"
-          icon="i-heroicons-bars-3"
-        />
+      <div class="flex items-center justify-between p-5 shadow">
+        <div v-if="!collapsed" class="font-bold text-2xl">SupaNuxt</div>
+        <div v-else class="font-bold text-2xl">SN</div>
       </div>
       <!-- Navigation -->
       <nav :class="['space-y-2', collapsed ? 'p-2.5' : 'p-4']">
@@ -50,7 +45,15 @@
       <!-- Header -->
       <header class="bg-white shadow-sm p-4">
         <div class="flex items-center justify-between">
-          <h1 class="text-2xl font-bold">Dashboard</h1>
+          <div class="flex items-center gap-2">
+            <UButton
+              @click="toggleSidebar"
+              variant="ghost"
+              size="xl"
+              icon="ri:bar-chart-horizontal-line"
+            />
+            <!-- <h1 class="text-2xl font-bold">Dashboard</h1> -->
+          </div>
           <div class="flex items-center space-x-4">
             <span
               >Welcome,

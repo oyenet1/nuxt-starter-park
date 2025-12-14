@@ -21,6 +21,7 @@
         "@iconify-json/heroicons": "^1.2.3",
         "@iconify-json/lucide": "^1.2.80",
         "@iconify-json/material-symbols": "^1.2.50",
+        "@iconify-json/ri": "^1.2.6",
       },
     },
   },
@@ -168,6 +169,8 @@
     "@iconify-json/lucide": ["@iconify-json/lucide@1.2.80", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-DwAHO+xJEJpOV5y2Q0DIoR3Au9UPk+J6an6KRO281QAxsz/+YpeySGSyZzUEK9tMrSAohkQamqlHx6lPDB8BEg=="],
 
     "@iconify-json/material-symbols": ["@iconify-json/material-symbols@1.2.50", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-71tjHR70h46LHtBFab3fAd2V/wPTO7JMV5lKnRn3IcF303LaFgAlO0BZeTJDcmCv9d0snRZmnoLZAJVD7/eisw=="],
+
+    "@iconify-json/ri": ["@iconify-json/ri@1.2.6", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-tGXRmXtb8oFu8DNg9MsS1pywKFgs9QZ4U6LBzUamBHaw3ePSiPd7ouE64gzHzfEcR16hgVaXoUa+XxD3BB0XOg=="],
 
     "@iconify/collections": ["@iconify/collections@1.0.628", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-KI4zc7EuYrzfP5Ly3dH30v01ghu5HRrLSZBBZDqkPm00fmc1oJIbuTgpNxlP7z0YgUMbZ8kWzREjIFifRtvE/Q=="],
 
