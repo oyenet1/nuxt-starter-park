@@ -63,7 +63,7 @@
           </UInput>
         </UFormField>
 
-        <UButton type="submit"> Reset Password </UButton>
+        <UButton type="submit" :loading="isLoading"> Reset Password </UButton>
       </UForm>
     </UCard>
   </div>
@@ -94,9 +94,12 @@ const toast = useToast();
 
 const show = ref(false);
 
+const isLoading = ref(false);
+
 const { resetPassword } = useAuth();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  isLoading.value = true;
   try {
     await resetPassword(event.data.password);
     toast.add({
@@ -112,6 +115,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       description: "Password reset failed.",
       color: "error",
     });
+  } finally {
+    isLoading.value = false;
   }
 }
 </script>
