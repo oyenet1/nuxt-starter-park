@@ -50,7 +50,9 @@
           </UInput>
         </UFormField>
 
-        <UButton type="submit" size="xl" block> Sign In </UButton>
+        <UButton type="submit" size="xl" block :loading="isLoading">
+          Sign In
+        </UButton>
       </UForm>
 
       <div class="mt-6">
@@ -115,11 +117,14 @@ const toast = useToast();
 
 const show = ref(false);
 
+const isLoading = ref(false);
+
 const supabase = useSupabaseClient();
 
 const { login } = useAuth();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  isLoading.value = true;
   try {
     await login(event.data.email, event.data.password);
     toast.add({
@@ -131,6 +136,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   } catch (error: any) {
     console.error(error);
     toast.add({ title: "Error", description: "Login failed.", color: "error" });
+  } finally {
+    isLoading.value = false;
   }
 }
 

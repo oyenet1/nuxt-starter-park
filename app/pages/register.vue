@@ -49,7 +49,7 @@
           </UInput>
         </UFormField>
 
-        <UButton type="submit"> Sign Up </UButton>
+        <UButton type="submit" :loading="isLoading"> Sign Up </UButton>
       </UForm>
 
       <div class="mt-6">
@@ -111,11 +111,14 @@ const toast = useToast();
 
 const show = ref(false);
 
+const isLoading = ref(false);
+
 const supabase = useSupabaseClient();
 
 const { register } = useAuth();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  isLoading.value = true;
   try {
     await register(
       event.data.email,
@@ -135,6 +138,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       description: "Registration failed.",
       color: "error",
     });
+  } finally {
+    isLoading.value = false;
   }
 }
 

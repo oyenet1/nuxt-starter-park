@@ -20,10 +20,17 @@
         @submit="onSubmit"
       >
         <UFormField size="xl" label="Email" name="email">
-          <UInput class="w-full" v-model="state.email" type="email" />
+          <UInput
+            icon="material-symbols:mail"
+            class="w-full"
+            v-model="state.email"
+            type="email"
+          />
         </UFormField>
 
-        <UButton type="submit"> Send Reset Email </UButton>
+        <UButton type="submit" block size="xl" :loading="isLoading">
+          Send Reset Email
+        </UButton>
       </UForm>
       <template #footer>
         <div class="text-center">
@@ -57,9 +64,12 @@ const state = reactive<Partial<Schema>>({
 
 const toast = useToast();
 
+const isLoading = ref(false);
+
 const { forgotPassword } = useAuth();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  isLoading.value = true;
   try {
     await forgotPassword(event.data.email);
     toast.add({
@@ -74,6 +84,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       description: "Failed to send reset email.",
       color: "error",
     });
+  } finally {
+    isLoading.value = false;
   }
 }
 </script>
