@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"
+    class="min-h-screen bg-linear-to-br from-mongoose-100 via-35% to-mongoose-400 flex items-center justify-center p-4"
   >
     <UCard class="w-full max-w-md shadow-lg">
       <template #header>
@@ -20,12 +20,17 @@
         @submit="onSubmit"
       >
         <UFormField size="xl" label="Email" name="email">
-          <UInput class="w-full" v-model="state.email" />
+          <UInput
+            icon="material-symbols:mail-outline-rounded"
+            class="w-full"
+            v-model="state.email"
+          />
         </UFormField>
 
         <UFormField size="xl" label="Password" name="password">
           <UInput
             class="w-full"
+            icon="solar:lock-password-bold"
             v-model="state.password"
             :type="show ? 'text' : 'password'"
             :ui="{ trailing: 'pe-1' }"
@@ -34,7 +39,7 @@
               <UButton
                 color="neutral"
                 variant="link"
-                size="sm"
+                size="xl"
                 :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
                 :aria-label="show ? 'Hide password' : 'Show password'"
                 :aria-pressed="show"
@@ -47,6 +52,28 @@
 
         <UButton type="submit" size="xl" block> Sign In </UButton>
       </UForm>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300" />
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">Or continue with</span>
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-2 gap-3">
+          <UButton @click="loginWithGoogle" variant="outline" size="lg" block>
+            <UIcon name="i-logos-google-icon" class="mr-2 h-4 w-4" />
+            Google
+          </UButton>
+          <UButton @click="loginWithGithub" variant="outline" size="lg" block>
+            <UIcon name="i-logos-github-icon" class="mr-2 h-4 w-4" />
+            GitHub
+          </UButton>
+        </div>
+      </div>
+
       <template #footer>
         <div class="text-center space-y-2">
           <NuxtLink
@@ -68,13 +95,6 @@
   </div>
 </template>
 
-<style>
-/* Hide the password reveal button in Edge */
-::-ms-reveal {
-  display: none;
-}
-</style>
-
 <script setup lang="ts">
 import * as z from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
@@ -95,6 +115,8 @@ const toast = useToast();
 
 const show = ref(false);
 
+const supabase = useSupabaseClient();
+
 const { login } = useAuth();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -109,6 +131,30 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   } catch (error: any) {
     console.error(error);
     toast.add({ title: "Error", description: "Login failed.", color: "error" });
+  }
+}
+
+async function loginWithGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: window.location.origin,
+    },
+  });
+  if (error) {
+    toast.add({ title: "Error", description: error.message, color: "error" });
+  }
+}
+
+async function loginWithGithub() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: window.location.origin,
+    },
+  });
+  if (error) {
+    toast.add({ title: "Error", description: error.message, color: "error" });
   }
 }
 </script>

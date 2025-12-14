@@ -51,6 +51,28 @@
 
         <UButton type="submit"> Sign Up </UButton>
       </UForm>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300" />
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">Or continue with</span>
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-2 gap-3">
+          <UButton @click="loginWithGoogle" variant="outline" size="lg" block>
+            <UIcon name="i-logos-google-icon" class="mr-2 h-4 w-4" />
+            Google
+          </UButton>
+          <UButton @click="loginWithGithub" variant="outline" size="lg" block>
+            <UIcon name="i-logos-github-icon" class="mr-2 h-4 w-4" />
+            GitHub
+          </UButton>
+        </div>
+      </div>
+
       <template #footer>
         <div class="text-center">
           <div class="text-sm text-gray-600">
@@ -66,13 +88,6 @@
     </UCard>
   </div>
 </template>
-
-<style>
-/* Hide the password reveal button in Edge */
-::-ms-reveal {
-  display: none;
-}
-</style>
 
 <script setup lang="ts">
 import * as z from "zod";
@@ -96,6 +111,8 @@ const toast = useToast();
 
 const show = ref(false);
 
+const supabase = useSupabaseClient();
+
 const { register } = useAuth();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -118,6 +135,30 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       description: "Registration failed.",
       color: "error",
     });
+  }
+}
+
+async function loginWithGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: window.location.origin,
+    },
+  });
+  if (error) {
+    toast.add({ title: "Error", description: error.message, color: "error" });
+  }
+}
+
+async function loginWithGithub() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: window.location.origin,
+    },
+  });
+  if (error) {
+    toast.add({ title: "Error", description: error.message, color: "error" });
   }
 }
 </script>

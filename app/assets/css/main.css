@@ -33,3 +33,8 @@ button,
 a {
   cursor: pointer;
 }
+
+/* Hide the password reveal button in Edge */
+::-ms-reveal {
+  display: none;
+}

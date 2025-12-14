@@ -69,13 +69,6 @@
   </div>
 </template>
 
-<style>
-/* Hide the password reveal button in Edge */
-::-ms-reveal {
-  display: none;
-}
-</style>
-
 <script setup lang="ts">
 import * as z from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
