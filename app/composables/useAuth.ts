@@ -81,17 +81,47 @@ export const useAuth = () => {
   };
 
   const sendOTP = async (email: string, otp: string) => {
-    await $fetch("/api/email/otp", {
-      method: "POST",
-      body: { email, otp },
-    });
+    try {
+      await $fetch("/api/email/otp", {
+        method: "POST",
+        body: { email, otp },
+      });
+      toast.add({
+        title: "Success",
+        description: "OTP sent successfully.",
+        color: "success",
+      });
+    } catch (error) {
+      console.error("Failed to send OTP:", error);
+      toast.add({
+        title: "Error",
+        description: "Failed to send OTP.",
+        color: "error",
+      });
+      throw error;
+    }
   };
 
   const subscribeNewsletter = async (email: string, name?: string) => {
-    await $fetch("/api/email/newsletter", {
-      method: "POST",
-      body: { email, name },
-    });
+    try {
+      await $fetch("/api/email/newsletter", {
+        method: "POST",
+        body: { email, name },
+      });
+      toast.add({
+        title: "Success",
+        description: "Newsletter subscription successful.",
+        color: "success",
+      });
+    } catch (error) {
+      console.error("Failed to subscribe to newsletter:", error);
+      toast.add({
+        title: "Error",
+        description: "Failed to subscribe to newsletter.",
+        color: "error",
+      });
+      throw error;
+    }
   };
 
   return {
