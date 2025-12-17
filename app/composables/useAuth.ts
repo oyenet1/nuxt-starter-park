@@ -1,6 +1,7 @@
 export const useAuth = () => {
   const user = useSupabaseUser();
   const supabase = useSupabaseClient();
+  const toast = useToast();
 
   const isAuthenticated = computed(() => !!user.value);
 
@@ -32,7 +33,12 @@ export const useAuth = () => {
       });
     } catch (emailError) {
       console.error("Failed to send welcome email:", emailError);
-      // Don't throw, as registration succeeded
+      toast.add({
+        title: "Warning",
+        description:
+          "Registration successful, but welcome email could not be sent.",
+        color: "warning",
+      });
     }
   };
 
@@ -59,7 +65,12 @@ export const useAuth = () => {
       });
     } catch (emailError) {
       console.error("Failed to send confirmation email:", emailError);
-      // Don't throw, as reset succeeded
+      toast.add({
+        title: "Warning",
+        description:
+          "Password reset successful, but confirmation email could not be sent.",
+        color: "warning",
+      });
     }
   };
 
