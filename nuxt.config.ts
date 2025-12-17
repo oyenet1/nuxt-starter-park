@@ -20,6 +20,12 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    prerender: {
+      autoSubfolderIndex: false,
+    },
+  },
+
   ui: {
     colorMode: false,
   },
