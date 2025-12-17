@@ -23,6 +23,17 @@ export const useAuth = () => {
       },
     });
     if (error) throw error;
+
+    // Send welcome email
+    try {
+      await $fetch("/api/email/welcome", {
+        method: "POST",
+        body: { email, name },
+      });
+    } catch (emailError) {
+      console.error("Failed to send welcome email:", emailError);
+      // Don't throw, as registration succeeded
+    }
   };
 
   const forgotPassword = async (email: string) => {
@@ -35,12 +46,41 @@ export const useAuth = () => {
       password,
     });
     if (error) throw error;
+
+    // Send password reset confirmation email
+    try {
+      const user = useSupabaseUser();
+      await $fetch("/api/email/password-reset-confirmation", {
+        method: "POST",
+        body: {
+          email: user.value?.email,
+          name: user.value?.user_metadata?.name,
+        },
+      });
+    } catch (emailError) {
+      console.error("Failed to send confirmation email:", emailError);
+      // Don't throw, as reset succeeded
+    }
   };
 
   const logout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
     await navigateTo("/login");
+  };
+
+  const sendOTP = async (email: string, otp: string) => {
+    await $fetch("/api/email/otp", {
+      method: "POST",
+      body: { email, otp },
+    });
+  };
+
+  const subscribeNewsletter = async (email: string, name?: string) => {
+    await $fetch("/api/email/newsletter", {
+      method: "POST",
+      body: { email, name },
+    });
   };
 
   return {
@@ -51,5 +91,7 @@ export const useAuth = () => {
     forgotPassword,
     resetPassword,
     logout,
+    sendOTP,
+    subscribeNewsletter,
   };
 };

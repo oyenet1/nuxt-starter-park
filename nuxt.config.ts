@@ -9,6 +9,8 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/supabase",
     "@nuxtjs/device",
+    "@nuxtjs/seo",
+    'nuxt-resend'
   ],
   supabase: {
     redirectOptions: {
@@ -24,6 +26,11 @@ export default defineNuxtConfig({
     prerender: {
       autoSubfolderIndex: false,
     },
+  },
+
+  site: {
+    url: "https://bowofade.com",
+    name: "My Supanuxt",
   },
 
   ui: {
