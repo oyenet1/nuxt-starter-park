@@ -26,4 +26,8 @@
 
 <script setup>
 const { user, isAuthenticated, logout } = useAuth();
+
+useSeoMeta({
+  title: "Home",
+});
 </script>

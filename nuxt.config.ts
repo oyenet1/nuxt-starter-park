@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@nuxtjs/device",
     "@nuxtjs/seo",
-    'nuxt-resend'
+    "nuxt-resend",
   ],
   supabase: {
     redirectOptions: {
@@ -31,6 +31,18 @@ export default defineNuxtConfig({
   site: {
     url: "https://bowofade.com",
     name: "My Supanuxt",
+    defaultLocale: "en",
+  },
+
+  app: {
+    head: {
+      titleTemplate: "%s | My Supanuxt",
+    },
+  },
+
+  ogImage: {
+    enabled: true,
+    fonts: ["Inter:400", "Inter:700"],
   },
 
   ui: {
